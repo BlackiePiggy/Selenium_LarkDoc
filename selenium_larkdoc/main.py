@@ -50,10 +50,21 @@ click_element(element)
 elements_2 = driver.find_elements(By.XPATH, '//div[@class="ud__text ud__menu-normal-item-title-content ud__menu-normal-item-title-content-text-overflow ud-typography-body-0 u14wgoeq u238cxi u1bdmrri uodcvno u11adn32 u1f3wrh8 uxkbsdt udz62fk u6rw91u u1urq0v1 uktmkt9"]')
 click_element(elements_2)
 
-# 定位并点击第 1 片feishu文档
-elements = driver.find_elements(By.CLASS_NAME, 'file-list-item')  # 替换 'element_x' 为实际的选择器
+# 定位文档列表（无文件夹）
+elements = driver.find_elements(By.XPATH, '//li[@class="file-list-item"]') 
 
-# 循环 100 次
+element_folders_root = driver.find_elements(By.XPATH, '//ul[@class="sc-jUotMc eFNjah" and @data-e2e="folder-sm-grid-list"] /child::div')
+
+# 索引文件夹中的每个文档
+#for i in range(len(element_folders_root)):
+    # 进入第一个文件夹
+#    element_folders_root[i].click()
+
+#    elements_1 = driver.find_elements(By.XPATH, '//li[@role="item" and @class="file-list-item"]') 
+#    for j in range(len(elements_1)):
+    
+
+# 循环根文件夹下的文档
 for i in range(len(elements)):
     # 切换窗口至原页面（feishu）
     switch_to_window(driver, 0)
@@ -95,9 +106,10 @@ for i in range(len(elements)):
     click_element(elements_inside)
 
     # 全选、复制
-    webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('a').send_keys('a').key_up(Keys.CONTROL).perform()
+    webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('a').send_keys('a').send_keys('a').key_up(Keys.CONTROL).perform()
     time.sleep(0.5)  # 等待选中
     webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
+    
 
     # 切换窗口至页面（flowus）
     switch_to_window(driver, 1)
@@ -114,9 +126,7 @@ for i in range(len(elements)):
 
     # 粘贴
     webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
-
-    # 等待粘贴操作
-    time.sleep(0.5)
+    time.sleep(1)  
 
     # 关闭第二个网站
     switch_to_window(driver, -1)

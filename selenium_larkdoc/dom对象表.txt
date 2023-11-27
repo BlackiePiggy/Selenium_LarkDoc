@@ -1,0 +1,19 @@
+dom对象表
+
+# 文件夹父对象，用下面命令选取第i个文件夹
+elements_inside  = driver.find_elements(By.XPATH, '//ul[@class="sc-jUotMc eFNjah"]/child::div[i]')
+
+# 判断是文件夹还是文档
+if class of svg is "sc-iNGGwv sc-jeqYYF hsrLVo kvxvkn":	# 是文件夹
+	click
+else if class of svg is "sc-iNGGwv sc-jeqYYF hsrLVo kvxvkn" #是文档
+	do sth.
+else 
+	do nothing
+
+# 文件阅览操作顺序：
+# 进入第一个文件夹 -- 进入第二个文件夹 -- ... -- 进入第N个文件夹 -- 操作文档 -- 返回上一级 
+# 
+
+# selenium返回上级
+driver.back()
